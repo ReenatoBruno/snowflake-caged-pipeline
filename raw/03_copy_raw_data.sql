@@ -1,9 +1,0 @@
--- Load raw data from the S3 stage into the TB_CAGED_RAW table
-USE ROLE ACCOUNTADMIN;
-USE DATABASE CAGED;
-USE SCHEMA RAW;
-USE WAREHOUSE WH_CAGED_ETL_S;
-
-COPY INTO TB_CAGED_RAW
-FROM @s3_stage_caged_raw
-ON_ERROR = 'SKIP_FILE';
