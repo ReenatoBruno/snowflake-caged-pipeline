@@ -1,0 +1,27 @@
+USE ROLE SYSADMIN; 
+
+USE WAREHOUSE WH_CAGED_XS;
+
+CREATE DATABASE IF NOT EXISTS DB_CAGED
+    DATA_RETENTION_TIME_IN_DAYS = 7
+    COMMENT = 'CAGED data (General Registry of Employed and Unemployed) - Medallion Architecture';
+
+CREATE SCHEMA IF NOT EXISTS DB_CAGED.BRONZE
+    DATA_RETENTION_TIME_IN_DAYS = 7
+    COMMENT = 'Bronze layer - Raw data ingested from s3 via COPY INTO'; 
+
+CREATE SCHEMA IF NOT EXISTS DB_CAGED.SILVER
+    DATA_RETENTION_TIME_IN_DAYS = 7
+    COMMENT = 'Silver layer - Cleaned, validated and typed data';
+
+CREATE SCHEMA IF NOT EXISTS DB_CAGED.GOLD
+    DATA_RETENTION_TIME_IN_DAYS = 7
+    COMMENT = 'Gold layer - Aggregated data and business metrics';
+
+CREATE SCHEMA IF NOT EXISTS DB_CAGED.STAGING
+    DATA_RETENTION_TIME_IN_DAYS = 1 
+    COMMENT = 'Staging area - Temporary data for ETL processes';
+
+SHOW DATABASES LIKE 'DB_CAGED';
+
+SHOW SCHEMAS IN DATABASE DB_CAGED;
